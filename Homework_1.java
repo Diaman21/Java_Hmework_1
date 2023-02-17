@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class HomeWork {
     public static void main(String[] args) {
 
-        taskTwo();
+        taskThree();
 
     }
 
@@ -49,23 +49,34 @@ public class HomeWork {
         /*
         3. Реализовать простой калькулятор
         */
-        int firstNumber, secondNumber;
+        double firstNumber;
+        int secondNumber;
         String operator;
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter first number: ");
-            firstNumber = Integer.parseInt(scanner.nextLine());
+            firstNumber = Double.parseDouble(scanner.nextLine());
             System.out.print("Enter second number: ");
             secondNumber = Integer.parseInt(scanner.nextLine());
             System.out.print("Enter operator: ");
             operator = scanner.nextLine();
         }
+        boolean flag = firstNumber % 1 == 0;
+        String form = "";
+        String reform = "";
+        if (flag) {
+            form = "%1$.0f%3$s%2$d=";
+            reform = "%1$.2f";
+        } else {
+            form = "%1$.3f%3$s%2$d=";
+            reform = "%1$.3f";
+        }
 
-        System.out.printf("%1$d%3$s%2$d=",firstNumber,secondNumber,operator);
+        System.out.printf(form,firstNumber,secondNumber,operator);
         switch (operator) {
-            case "+" -> System.out.print(firstNumber + secondNumber);
-            case "-" -> System.out.print(firstNumber - secondNumber);
-            case "/" -> System.out.print(firstNumber / secondNumber);
-            case "*" -> System.out.print(firstNumber * secondNumber);
+            case "+" -> System.out.printf(reform,firstNumber + secondNumber);
+            case "-" -> System.out.printf(reform,firstNumber - secondNumber);
+            case "/" -> System.out.printf(reform,firstNumber / secondNumber);
+            case "*" -> System.out.printf(reform,firstNumber * secondNumber);
             default -> System.out.println("Повтори команду.");
         }
     }
